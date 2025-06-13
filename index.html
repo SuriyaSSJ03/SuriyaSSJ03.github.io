@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suriya Jaisankar - Cinematic Cuts. Bold Edits.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Poppins (for headings) & Inter (for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Subtle dark gradient/texture for background */
+            background: radial-gradient(at 50% 50%, #1a202c 0%, #0f172a 70%);
+            color: #e2e8f0; /* Light text */
+            overflow-x: hidden; /* Prevent horizontal scroll from abstract elements */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom Glassmorphism Styles */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.08); /* Semi-transparent white */
+            backdrop-filter: blur(15px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(15px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle border */
+            border-radius: 1.5rem; /* Large rounded corners */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Soft shadow */
+            transition: all 0.3s ease-in-out;
+        }
+
+        .glass-panel-light {
+            background-color: rgba(255, 255, 255, 0.15); /* Slightly less transparent */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 188, 212, 0.4); /* Cyan glow border */
+        }
+
+        /* Neon/Glow Accents (for buttons, icons, etc.) */
+        .btn-neon-blue {
+            background-color: #00BCD4; /* Vibrant Cyan */
+            color: #0f172a; /* Dark text for contrast */
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px; /* Pill shape */
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.5); /* Cyan glow */
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-neon-blue:hover {
+            background-color: #00ACC1;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 188, 212, 0.8), 0 0 50px rgba(0, 188, 212, 0.3);
+        }
+
+        .text-neon-accent {
+            color: #00BCD4; /* Vibrant Cyan for text accents */
+        }
+        .icon-neon-accent {
+            color: #00BCD4; /* Vibrant Cyan for icons */
+            text-shadow: 0 0 5px rgba(0, 188, 212, 0.7);
+        }
+
+        /* Smooth scroll for navigation */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Section Heading Underline */
+        .section-heading {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 3rem; /* Adjusted for Poppins boldness */
+            font-weight: 700;
+            color: #f8fafc; /* Lighter text for headings */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #FFD700; /* Gold accent */
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Navigation link animation */
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #00BCD4; /* Cyan underline */
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover {
+            transform: scale(1.05);
+            color: #00BCD4; /* Cyan color on hover */
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Abstract Background Elements (glowing lines/particles) */
+        .abstract-glow-line {
+            position: absolute;
+            height: 1px; /* Very thin line */
+            background: linear-gradient(to right, transparent, var(--glow-color), transparent);
+            box-shadow: 0 0 5px var(--glow-color-shadow);
+            opacity: 0; /* Starts invisible */
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            z-index: 0; /* Behind content */
+            pointer-events: none; /* Ensure they don't block interaction */
+        }
+
+        .glow-line-1 {
+            width: 400px;
+            --glow-color: rgba(0, 188, 212, 0.4); /* Cyan glow */
+            --glow-color-shadow: rgba(0, 188, 212, 0.6);
+            animation: flow-right 25s linear infinite;
+        }
+        .glow-line-2 {
+            width: 500px;
+            --glow-color: rgba(255, 215, 0, 0.3); /* Gold glow */
+            --glow-color-shadow: rgba(255, 215, 0, 0.5);
+            animation: flow-left 30s linear infinite;
+            transform: rotate(10deg);
+        }
+        .glow-line-3 {
+            height: 2px; /* Slightly thicker */
+            width: 300px;
+            --glow-color: rgba(93, 63, 211, 0.4); /* Purple glow */
+            --glow-color-shadow: rgba(93, 63, 211, 0.6);
+            animation: flow-diagonal 20s linear infinite;
+            transform: rotate(-20deg);
+        }
+        .glow-line-4 {
+            width: 600px;
+            --glow-color: rgba(0, 172, 193, 0.3); /* Teal glow */
+            --glow-color-shadow: rgba(0, 172, 193, 0.5);
+            animation: flow-right 28s linear infinite reverse;
+        }
+        .glow-line-5 {
+            height: 1.5px;
+            width: 350px;
+            --glow-color: rgba(255, 105, 180, 0.3); /* Pink glow */
+            --glow-color-shadow: rgba(255, 105, 180, 0.5);
+            animation: flow-left 23s linear infinite;
+            transform: rotate(5deg);
+        }
+
+        /* Keyframe animations for glowing lines */
+        @keyframes flow-right {
+            0% { transform: translateX(-100vw); opacity: 0; }
+            5% { opacity: 0.1; }
+            50% { transform: translateX(calc(100vw + 100%)); opacity: 0.08; }
+            95% { opacity: 0.05; }
+            100% { transform: translateX(-100vw); opacity: 0; }
+        }
+
+        @keyframes flow-left {
+            0% { transform: translateX(calc(100vw + 100%)); opacity: 0; }
+            5% { opacity: 0.1; }
+            50% { transform: translateX(-100vw); opacity: 0.08; }
+            95% { opacity: 0.05; }
+            100% { transform: translateX(calc(100vw + 100%)); opacity: 0; }
+        }
+
+        @keyframes flow-diagonal {
+            0% { transform: translate(-100vw, -100vh) rotate(-20deg); opacity: 0; }
+            5% { opacity: 0.1; }
+            50% { transform: translate(calc(100vw + 100%), calc(100vh + 100%)) rotate(-20deg); opacity: 0.08; }
+            95% { opacity: 0.05; }
+            100% { transform: translate(-100vw, -100vh) rotate(-20deg); opacity: 0; }
+        }
+        
+        /* z-index for content */
+        .content-z-index {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Ensure images and overlays within portfolio items have sharp corners */
+        .portfolio-item .video-thumbnail-horizontal,
+        .portfolio-item .portfolio-overlay {
+            border-radius: 0 !important; /* Override any parent border-radius */
+        }
+        /* Ensure the entire portfolio-item does not have rounded corners at the bottom */
+        .portfolio-item {
+            border-radius: 0 !important; /* Resetting all border-radius if needed */
+            border-top-left-radius: 1.5rem; /* Reapply top rounded if desired */
+            border-top-right-radius: 1.5rem; /* Reapply top rounded if desired */
+        }
+
+        /* Gradient for name */
+        .gradient-text {
+            background: linear-gradient(90deg, #00BCD4, #5D3FD3); /* Cyan to Purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support text-fill-color */
+        }
+
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.15); /* Glassmorphism style */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3);
+            color: #e2e8f0;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #e2e8f0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover {
+            color: #00BCD4;
+        }
+
+        .loading-indicator {
+            display: none; /* Hidden by default */
+            text-align: center;
+            margin-top: 1rem;
+            color: #00BCD4;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header Section -->
+    <header class="bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-md text-white p-4 shadow-lg fixed w-full z-50 glass-panel-light">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#home" class="text-3xl font-extrabold px-2 py-1 transition-colors duration-300 hover:text-neon-accent">
+                Suriya Jaisankar
+            </a>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class class="nav-link text-lg text-white hover:text-neon-accent">Home</a></li>
+                <li><a href="#about" class="nav-link text-lg text-white hover:text-neon-accent">About</a></li>
+                <li><a href="#portfolio" class class="nav-link text-lg text-white hover:text-neon-accent">Portfolio</a></li>
+                <li><a href="#services" class="nav-link text-lg text-white hover:text-neon-accent">Services</a></li>
+                <li><a href="#contact" class="nav-link text-lg text-white hover:text-neon-accent">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-2xl focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center space-y-8">
+            <button class="absolute top-4 right-4 text-white text-3xl focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul class="flex flex-col space-y-6 text-2xl">
+                <li><a href="#home" class="nav-link text-white hover:text-neon-accent" onclick="toggleMobileMenu()">Home</a></li>
+                <li><a href="#about" class="nav-link text-white hover:text-neon-accent" onclick="toggleMobileMenu()">About</a></li>
+                <li><a href="#portfolio" class="nav-link text-white hover:text-neon-accent" onclick="toggleMobileMenu()">Portfolio</a></li>
+                <li><a href="#services" class="nav-link text-white hover:text-neon-accent" onclick="toggleMobileMenu()">Services</a></li>
+                <li><a href="#contact" class="nav-link text-white hover:text-neon-accent" onclick="toggleMobileMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-white py-20 md:py-32 overflow-hidden">
+            <!-- Background will now be the body's radial-gradient and the abstract glow lines -->
+            <!-- Abstract glowing lines for hero section -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="abstract-glow-line glow-line-1" style="top: 10%; left: -50px; animation-delay: 0s;"></div>
+                <div class="abstract-glow-line glow-line-2" style="top: 30%; right: -50px; animation-delay: 5s;"></div>
+                <div class="abstract-glow-line glow-line-3" style="bottom: 20%; left: 10%; animation-delay: 10s;"></div>
+                <div class="abstract-glow-line glow-line-4" style="top: 50%; left: -100px; animation-delay: 15s;"></div>
+                <div class="abstract-glow-line glow-line-5" style="bottom: 5%; right: 5%; animation-delay: 20s;"></div>
+            </div>
+
+            <div class="container mx-auto text-center px-4 content-z-index">
+                <h1 class="text-5xl md:text-8xl font-extrabold leading-tight mb-4 animate-fade-in-down">
+                    <span class="gradient-text">Suriya Jaisankar</span>
+                </h1>
+                <p class="text-xl md:text-4xl mb-10 max-w-4xl mx-auto opacity-90 animate-fade-in-up">
+                    Professional Video Editor & Content Creator <br> Crafting compelling visuals that elevate your brand.
+                </p>
+                <a href="#portfolio" class="btn-neon-blue text-xl md:text-2xl px-12 py-4 inline-block animate-bounce-once">
+                    Watch My Reel <i class="fas fa-play-circle ml-3"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-16 md:py-24 relative overflow-hidden">
+            <div class="abstract-glow-line glow-line-2" style="top: 5%; left: 0%; animation-delay: 2s; transform: rotate(20deg);"></div>
+            <div class="abstract-glow-line glow-line-5" style="bottom: 10%; right: 0%; animation-delay: 7s; transform: rotate(-30deg);"></div>
+
+            <div class="container mx-auto px-4 text-center content-z-index">
+                <h2 class="section-heading text-white">About Me</h2>
+                <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-12 glass-panel p-8 md:p-12">
+                    <div class="flex justify-center items-center">
+                        <img src="Suriya Passport size.png" alt="Suriya Jaisankar Profile Photo" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl border-4 border-neon-accent transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="text-left text-gray-200">
+                        <p class="text-lg leading-relaxed mb-6">
+                            I'm Suriya Jaisankar, a passionate video editor, motion graphics artist, and content creator with **3.5 years of dedicated experience** in bringing visual narratives to life. I've had the privilege of working with a diverse range of clients, from dynamic **YouTube creators** to leading **agencies** and prominent **brands**.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            My expertise lies in transforming raw footage into polished, engaging content that captivates audiences and achieves client objectives. I am proficient in **Adobe Premiere Pro, After Effects, and DaVinci Resolve**, dedicated to delivering high-quality, impactful visuals that resonate with your audience. Let's collaborate to tell your unique story.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio/Work Showcase Section -->
+        <section id="portfolio" class="py-16 md:py-24 relative overflow-hidden">
+            <div class="abstract-glow-line glow-line-1" style="top: 20%; right: 0%; animation-delay: 1s; transform: rotate(15deg);"></div>
+            <div class="abstract-glow-line glow-line-3" style="bottom: 25%; left: 0%; animation-delay: 6s; transform: rotate(45deg);"></div>
+
+            <div class="container mx-auto px-4 text-center content-z-index">
+                <h2 class="section-heading text-white">My Work</h2>
+                <p class="text-lg text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Explore a selection of my recent video editing and motion graphics projects. Click on any thumbnail to watch the full video.
+                </p>
+
+                <!-- Horizontal Videos Section -->
+                <h3 class="text-3xl font-bold text-neon-accent mb-8 mt-16">Horizontal Videos</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Horizontal Video Item 1 -->
+                    <div class="portfolio-item glass-panel glass-card-hover">
+                        <img src="https://placehold.co/600x350/1e293b/a0aec0?text=Project+1+Thumbnail" alt="Horizontal Video Thumbnail - Corporate Brand Film" class="video-thumbnail-horizontal">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-white text-2xl font-bold mb-2">How to Become a UI/UX Designer in 2024 - Step by Step Roadmap 💯</h3>
+                            <p class="text-gray-300 text-center mb-4 px-4">A comprehensive guide for aspiring UI/UX designers.</p>
+                            <a href="https://youtu.be/Jf2uji_szog?si=DxhJsUxckAn-FZHU" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-4 text-left">
+                            <h4 class="text-xl font-semibold text-white">SAPTARSHI PRAKASH</h4>
+                            <p class="text-gray-400 text-sm mt-1">Client: SAPTARSHI PRAKASH | Type: Youtube video</p>
+                        </div>
+                    </div>
+                    <!-- Horizontal Video Item 2 -->
+                    <div class="portfolio-item glass-panel glass-card-hover">
+                        <img src="https://placehold.co/600x350/1e293b/a0aec0?text=Project+2+Thumbnail" alt="Horizontal Video Thumbnail 2" class="video-thumbnail-horizontal">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-white text-2xl font-bold mb-2">Event Highlight Reel</h3>
+                            <p class="text-gray-300 text-center mb-4 px-4">Capturing the energy of a live conference.</p>
+                            <a href="https://vimeo.com/yourvideolink" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-4 text-left">
+                            <h4 class="text-xl font-semibold text-white">Event Aftermovie</h4>
+                            <p class="text-gray-400 text-sm mt-1">Client: Conference Organizers | Type: Event</p>
+                        </div>
+                    </div>
+                    <!-- Horizontal Video Item 3 -->
+                    <div class="portfolio-item glass-panel glass-card-hover">
+                        <img src="https://placehold.co/600x350/1e293b/a0aec0?text=Project+3+Thumbnail" alt="Horizontal Video Thumbnail 3" class="video-thumbnail-horizontal">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-white text-2xl font-bold mb-2">Short Film - "The Journey"</h3>
+                            <p class="text-gray-300 text-center mb-4 px-4">Narrative editing for an independent short film.</p>
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-4 text-left">
+                            <h4 class="text-xl font-semibold text-white">Indie Film Edit</h4>
+                            <p class="text-gray-400 text-sm mt-1">Client: Independent Filmmaker | Type: Narrative</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vertical Videos Section -->
+                <h3 class="text-3xl font-bold text-neon-accent mb-8 mt-16">Vertical Videos (Shorts, Reels)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Vertical Video Item 1 -->
+                    <div class="portfolio-item glass-panel glass-card-hover">
+                        <img src="https://placehold.co/350x600/1e293b/a0aec0?text=Vertical+Video+1" alt="Vertical Video Thumbnail 1" class="video-thumbnail-vertical">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-white text-2xl font-bold mb-2">BRAND AWARENESS VIDEO USING AI</h3>
+                            <p class="text-gray-300 text-center mb-4 px-4">Brand awareness video created using AI tools.</p>
+                            <a href="https://drive.google.com/file/d/1tfUhL2f_5rnUy3IEIAyzce5j5w6pLppi/preview" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-4 text-left">
+                            <h4 class="text-xl font-semibold text-white">Legacy Health</h4>
+                            <p class="text-gray-400 text-sm mt-1">Client: Legacy Health | Type: AI</p>
+                        </div>
+                    </div>
+                    <!-- Vertical Video Item 2 -->
+                    <div class="portfolio-item glass-panel glass-card-hover">
+                        <img src="https://placehold.co/350x600/1e293b/a0aec0?text=Vertical+Video+2" alt="Vertical Video Thumbnail 2" class="video-thumbnail-vertical">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-white text-2xl font-bold mb-2">YouTube Short</h3>
+                            <p class="text-gray-300 text-center mb-4 px-4">Quick, attention-grabbing content for YouTube Shorts.</p>
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-4 text-left">
+                            <h4 class="text-xl font-semibold text-white">Educational Short</h4>
+                            <p class="text-gray-400 text-sm mt-1">Client: Educational Channel | Type: YouTube</p>
+                        </div>
+                    </div>
+                    <!-- Vertical Video Item 3 -->
+                    <div class="portfolio-item glass-panel glass-card-hover">
+                        <img src="https://placehold.co/350x600/1e293b/a0aec0?text=Vertical+Video+3" alt="Vertical Video Thumbnail 3" class="video-thumbnail-vertical">
+                        <div class="portfolio-overlay">
+                            <h3 class="text-white text-2xl font-bold mb-2">Brand Story Reel</h3>
+                            <p class="text-gray-300 text-center mb-4 px-4">Vertical video storytelling for brand promotion.</p>
+                            <a href="https://vimeo.com/yourvideolink" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-4 text-left">
+                            <h4 class="text-xl font-semibold text-white">Behind-the-Scenes Reel</h4>
+                            <p class="text-gray-400 text-sm mt-1">Client: Production House | Type: Brand Story</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motion Graphics & Animation Sub-Section -->
+                <div class="py-16 mt-12 md:py-24 relative overflow-hidden">
+                    <div class="abstract-glow-line glow-line-4" style="top: 10%; right: 0%; animation-delay: 2s; transform: rotate(-10deg);"></div>
+                    <div class="abstract-glow-line glow-line-5" style="bottom: 15%; left: 0%; animation-delay: 8s; transform: rotate(20deg);"></div>
+
+                    <h3 class="text-3xl font-bold text-neon-accent mb-8 mt-16">Motion Graphics & Animation</h3>
+                    <p class="text-lg text-gray-300 mb-12 max-w-3xl mx-auto">
+                        Bringing concepts to life with dynamic motion design, explainer videos, and animated visuals.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Motion Graphics Item 1 -->
+                        <div class="portfolio-item glass-panel glass-card-hover">
+                            <img src="https://placehold.co/600x350/1e293b/a0aec0?text=Motion+Graphic+1" alt="Motion Graphics Project 1 Thumbnail" class="video-thumbnail-horizontal">
+                            <div class="portfolio-overlay">
+                                <h3 class="text-white text-2xl font-bold mb-2">ADVERTISEMENT FOR BEVRAGE BRAND</h3>
+                                <p class="text-gray-300 text-center mb-4 px-4">Promotional advertisement for MR.GOLISODA.</p>
+                                <a href="https://drive.google.com/file/d/1oVUDfyXMZfQZssEbtoux8uFE0zuMyKDL/preview" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                    Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                                </a>
+                            </div>
+                            <div class="p-4 text-left">
+                                <h4 class="text-xl font-semibold text-white">MR.GOLISODA</h4>
+                                <p class="text-gray-400 text-sm mt-1">Client: MR.GOLISODA | Type: TV Advertisement</p>
+                            </div>
+                        </div>
+                        <!-- Motion Graphics Item 2 -->
+                        <div class="portfolio-item glass-panel glass-card-hover">
+                            <img src="https://placehold.co/600x350/1e293b/a0aec0?text=Motion+Graphic+2" alt="Motion Graphics Project 2 Thumbnail" class="video-thumbnail-horizontal">
+                            <div class="portfolio-overlay">
+                                <h3 class="text-white text-2xl font-bold mb-2">Creative for Restaurant</h3>
+                                <p class="text-gray-300 text-center mb-4 px-4">Social media creative for NAFISA'S BIRYANI.</p>
+                                <a href="https://drive.google.com/file/d/11KEy7pFAfFLCaRx0jIwbxYaalkXUOj2U/preview" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                    Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                                </a>
+                            </div>
+                            <div class="p-4 text-left">
+                                <h4 class="text-xl font-semibold text-white">NAFISA'S BIRYANI</h4>
+                                <p class="text-gray-400 text-sm mt-1">Client: NAFISA'S BIRYANI | Type: Social media</p>
+                            </div>
+                        </div>
+                        <!-- Motion Graphics Item 3 -->
+                        <div class="portfolio-item glass-panel glass-card-hover">
+                            <img src="https://placehold.co/600x350/1e293b/a0aec0?text=Motion+Graphic+3" alt="Motion Graphics Project 3 Thumbnail" class="video-thumbnail-horizontal">
+                            <div class="portfolio-overlay">
+                                <h3 class="text-white text-2xl font-bold mb-2">Real estate AD</h3>
+                                <p class="text-gray-300 text-center mb-4 px-4">Advertisement for SK HOMES real estate.</p>
+                                <a href="https://drive.google.com/file/d/1RaOBtoIez-fvQ4tPkV8jW7W3KTaJV02j/preview" target="_blank" class="btn-neon-blue text-sm px-6 py-2">
+                                    Watch Video <i class="fas fa-external-link-alt ml-1"></i>
+                                </a>
+                            </div>
+                            <div class="p-4 text-left">
+                                <h4 class="text-xl font-semibold text-white">SK HOMES</h4>
+                                <p class="text-gray-400 text-sm mt-1">Client: SK HOMES | Type: Real estate</p>
+                            </d>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Motion Graphics & Animation Sub-Section -->
+
+                <div class="mt-16 content-z-index">
+                    <a href="#contact" class="btn-neon-blue text-xl px-10 py-4 inline-block">
+                        Have a Project in Mind? Let's Talk! <i class="fas fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+                <!-- Gemini API Integration: Project Description Generator -->
+                <div class="glass-panel p-8 rounded-xl shadow-lg mt-24 text-left">
+                    <h3 class="text-3xl font-bold text-neon-accent mb-6">Generate Project Description ✨</h3>
+                    <p class="text-gray-300 mb-6">Use Gemini AI to create compelling descriptions for your video editing projects!</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="gemini-project-title" class="block text-gray-200 text-sm font-bold mb-2">Project Title</label>
+                            <input type="text" id="gemini-project-title" class="glass-panel-light w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent bg-gray-800 bg-opacity-30 rounded-lg" placeholder="Example: Corporate Brand Film">
+                        </div>
+                        <div>
+                            <label for="gemini-client-name" class="block text-gray-200 text-sm font-bold mb-2">Client Name</label>
+                            <input type="text" id="gemini-client-name" class="glass-panel-light w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent bg-gray-800 bg-opacity-30 rounded-lg" placeholder="Example: MR.GOLISODA">
+                        </div>
+                        <div>
+                            <label for="gemini-project-type" class="block text-gray-200 text-sm font-bold mb-2">Project Type</label>
+                            <input type="text" id="gemini-project-type" class="glass-panel-light w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent bg-gray-800 bg-opacity-30 rounded-lg" placeholder="Example: TV Advertisement, YouTube Video, Social Media">
+                        </div>
+                        <div>
+                            <label for="gemini-key-details" class="block text-gray-200 text-sm font-bold mb-2">Key Details/Goal</label>
+                            <textarea id="gemini-key-details" rows="3" class="glass-panel-light w-full py-2 px-3 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent bg-gray-800 bg-opacity-30 rounded-lg" placeholder="Briefly describe the video's main purpose or content."></textarea>
+                        </div>
+                        <button id="generate-description-btn" class="btn-neon-blue w-full py-3 text-lg mt-4">
+                            Generate Description ✨
+                        </button>
+                        <div id="loading-indicator" class="loading-indicator">
+                            <i class="fas fa-spinner fa-spin mr-2"></i> Generating...
+                        </div>
+                        <div class="mt-6">
+                            <label for="generated-description" class="block text-gray-200 text-sm font-bold mb-2">Generated Description</label>
+                            <textarea id="generated-description" rows="4" class="glass-panel-light w-full py-2 px-3 text-white leading-tight bg-gray-800 bg-opacity-30 rounded-lg cursor-text" readonly placeholder="Generated description will appear here."></textarea>
+                            <button id="copy-description-btn" class="btn-neon-blue mt-2 px-4 py-2 text-sm hidden">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24 bg-gradient-to-t from-gray-900 to-slate-900 relative overflow-hidden">
+            <div class="abstract-glow-line glow-line-2" style="top: 10%; left: 20%; animation-delay: 2s; transform: rotate(15deg);"></div>
+            <div class="abstract-glow-line glow-line-5" style="bottom: 15%; right: 25%; animation-delay: 7s; transform: rotate(-30deg);"></div>
+
+            <div class="container mx-auto px-4 text-center content-z-index">
+                <h2 class="section-heading text-white">My Services</h2>
+                <p class="text-lg text-gray-300 mb-12 max-w-3xl mx-auto">
+                    I offer a comprehensive range of video editing, motion graphics, and content creation services tailored to your specific needs.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                    <!-- Service Card 1 -->
+                    <div class="glass-panel glass-card-hover p-8 rounded-xl text-center">
+                        <div class="text-5xl icon-neon-accent mb-4"><i class="fas fa-film"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Video Editing</h3>
+                        <p class="text-gray-300">From raw footage to polished final cuts, ensuring seamless flow and impactful storytelling.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="glass-panel glass-card-hover p-8 rounded-xl text-center">
+                        <div class="text-5xl icon-neon-accent mb-4"><i class="fas fa-magic"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Motion Graphics</h3>
+                        <p class="text-gray-300">Adding dynamic animations, titles, and visual effects to enhance your videos.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="glass-panel glass-card-hover p-8 rounded-xl text-center">
+                        <div class="text-5xl icon-neon-accent mb-4"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Content Creation</h3>
+                        <p class="text-gray-300">Developing engaging video concepts and narratives from scratch for various platforms.</p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="glass-panel glass-card-hover p-8 rounded-xl text-center">
+                        <div class="text-5xl icon-neon-accent mb-4"><i class="fas fa-palette"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Color Grading & Correction</h3>
+                        <p class="text-gray-300">Enhancing visual appeal with professional color treatment.</p>
+                    </div>
+                    <!-- Service Card 5 -->
+                    <div class="glass-panel glass-card-hover p-8 rounded-xl text-center">
+                        <div class="text-5xl icon-neon-accent mb-4"><i class="fas fa-volume-up"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Sound Design & Mixing</h3>
+                        <p class="text-gray-300">Creating immersive audio experiences with foley, music, and voiceovers.</p>
+                    </div>
+                    <!-- Service Card 6 (Animation Videos) -->
+                    <div class="glass-panel glass-card-hover p-8 rounded-xl text-center">
+                        <div class="text-5xl icon-neon-accent mb-4"><i class="fas fa-video"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">Animation Videos</h3>
+                        <p class="text-gray-300">Producing engaging animated content for explainers, intros, and marketing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-24 relative overflow-hidden">
+            <div class="abstract-glow-line glow-line-3" style="top: 20%; left: 5%; animation-delay: 4s; transform: rotate(30deg);"></div>
+            <div class="abstract-glow-line glow-line-4" style="bottom: 10%; right: 10%; animation-delay: 9s; transform: rotate(-10deg);"></div>
+
+            <div class="container mx-auto px-4 text-center content-z-index">
+                <h2 class="section-heading text-white">What Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto mt-12">
+                    <!-- Testimonial 1 (MABU_SHERIF) -->
+                    <div class="glass-panel p-8 rounded-xl shadow-lg text-left glass-card-hover">
+                        <p class="text-gray-300 italic text-lg mb-4">"Working with Suriya was a fantastic experience. Their attention to detail and ability to capture our brand's essence was truly impressive. The final video exceeded our expectations."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/1e293b/a0aec0?text=MABU" alt="MABU_SHERIF Profile Photo" class="w-16 h-16 rounded-full mr-4 object-cover shadow-md border border-cyan-700">
+                            <div>
+                                <p class="font-bold text-white">MABU_SHERIF</p>
+                                <p class="text-sm text-gray-400">YouTube Client (2.5+ Years)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 (ASAN ACADEMY) -->
+                    <div class="glass-panel p-8 rounded-xl shadow-lg text-left glass-card-hover">
+                        <p class="text-gray-300 italic text-lg mb-4">"Suriya transformed our educational content into engaging visual lessons. Their professionalism and creative insights were invaluable. Highly recommend their services for impactful video production!"</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/60x60/1e293b/a0aec0?text=ASAN" alt="Venkat Ranganathan - ASAN ACADEMY Profile Photo" class="w-16 h-16 rounded-full mr-4 object-cover shadow-md border border-cyan-700">
+                            <div>
+                                <p class="font-bold text-white">Venkat Ranganathan</p>
+                                <p class="text-sm text-gray-400">ASAN ACADEMY</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 relative overflow-hidden">
+            <div class="abstract-glow-line glow-line-1" style="top: 15%; right: 10%; animation-delay: 3s; transform: rotate(25deg);"></div>
+            <div class="abstract-glow-line glow-line-5" style="bottom: 5%; left: 15%; animation-delay: 8s; transform: rotate(-5deg);"></div>
+
+            <div class="container mx-auto px-4 text-center content-z-index">
+                <h2 class="section-heading text-white">Get in Touch</h2>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Ready to start your next video project? Fill out the form below or reach out directly.
+                </p>
+                <div class="max-w-xl mx-auto glass-panel p-8 rounded-xl shadow-lg">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="contact-name" class="block text-left text-gray-200 text-sm font-bold mb-2">Your Name</label>
+                            <input type="text" id="contact-name" name="name" placeholder="Enter your full name"
+                                   class="glass-panel-light appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent transition-all duration-200 bg-gray-800 bg-opacity-30">
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-left text-gray-200 text-sm font-bold mb-2">Your Email</label>
+                            <input type="email" id="contact-email" name="email" placeholder="your@example.com" value="suriyaaj03@gmail.com"
+                                   class="glass-panel-light appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent transition-all duration-200 bg-gray-800 bg-opacity-30">
+                        </div>
+                        <div>
+                            <label for="contact-message" class="block text-left text-gray-200 text-sm font-bold mb-2">Your Message</label>
+                            <textarea id="contact-message" name="message" rows="5" placeholder="Tell me about your project..."
+                                      class="glass-panel-light appearance-none border border-gray-700 rounded-lg w-full py-3 px-4 text-white leading-tight focus:outline-none focus:ring-2 focus:ring-neon-accent transition-all duration-200 bg-gray-800 bg-opacity-30"></textarea>
+                        </div>
+                        <button type="submit"
+                                class="btn-neon-blue w-full py-4 text-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                    <div class="mt-8 text-center text-gray-300">
+                        <p class="text-lg mb-4">Or connect with me directly:</p>
+                        <div class="flex flex-wrap justify-center items-center space-x-6 space-y-4 sm:space-y-0">
+                            <a href="mailto:suriyaaj03@gmail.com" class="icon-neon-accent hover:text-cyan-400 transition-colors duration-300 text-3xl" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/suriya-jaisankar-185b2523a/" target="_blank" class="icon-neon-accent hover:text-cyan-400 transition-colors duration-300 text-3xl" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/iam_.suriya/" target="_blank" class="icon-neon-accent hover:text-cyan-400 transition-colors duration-300 text-3xl" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://wa.me/918838899326" target="_blank" class="text-green-500 hover:text-green-400 transition-colors duration-300 text-3xl" aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                        <p class="mt-4">Phone: <a href="tel:+918838899326" class="text-neon-accent hover:underline">+91 8838899326</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-950 text-gray-400 py-8">
+        <div class="container mx-auto text-center px-4">
+            <p class="mb-4">© 2025 Suriya Jaisankar - Video Editor. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart text-red-500"></i> by Suriya Jaisankar</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Logic for Gemini API integration
+        document.getElementById('generate-description-btn').addEventListener('click', async () => {
+            const projectTitle = document.getElementById('gemini-project-title').value;
+            const clientName = document.getElementById('gemini-client-name').value;
+            const projectType = document.getElementById('gemini-project-type').value;
+            const keyDetails = document.getElementById('gemini-key-details').value;
+            const generatedDescriptionElement = document.getElementById('generated-description');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const copyButton = document.getElementById('copy-description-btn');
+
+            // Check if input fields are empty
+            if (!projectTitle || !clientName || !projectType || !keyDetails) {
+                generatedDescriptionElement.value = "Please fill in all fields.";
+                copyButton.classList.add('hidden');
+                return;
+            }
+
+            loadingIndicator.style.display = 'block'; // Show loading spinner
+            generatedDescriptionElement.value = ''; // Clear previous content
+            copyButton.classList.add('hidden'); // Hide copy button
+
+            // Construct the prompt for Gemini API
+            const prompt = `Generate a compelling 2-3 line description for a video editing portfolio project.
+                            Project title: "${projectTitle}".
+                            Client: "${clientName}".
+                            Type: "${projectType}".
+                            Key details: "${keyDetails}".
+                            Focus on visual impact, client success, and conciseness.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Provide API key here. If empty, Canvas will provide it at runtime.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    generatedDescriptionElement.value = text; // Display generated description
+                    copyButton.classList.remove('hidden'); // Show copy button
+                } else {
+                    generatedDescriptionElement.value = "Could not generate description. Please try again.";
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                generatedDescriptionElement.value = "Could not generate description. Network error.";
+            } finally {
+                loadingIndicator.style.display = 'none'; // Hide loading spinner
+            }
+        });
+
+        // Copy generated description to clipboard
+        document.getElementById('copy-description-btn').addEventListener('click', () => {
+            const generatedDescriptionElement = document.getElementById('generated-description');
+            generatedDescriptionElement.select();
+            document.execCommand('copy'); // This should work in an iframe
+            // Optional: small notification for copied
+            const originalText = copyButton.textContent;
+            copyButton.textContent = "Copied!";
+            setTimeout(() => {
+                copyButton.textContent = originalText;
+            }, 2000);
+        });
+
+        // Ensure your image path is correctly set for this page
+        // If 'Suriya Passport size.png' is in the same directory as index.html, this is correct.
+        // Otherwise, update the src attribute in the HTML directly.
+    </script>
+</body>
+</html>
